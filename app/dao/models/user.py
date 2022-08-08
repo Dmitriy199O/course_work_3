@@ -12,14 +12,13 @@ class User(BaseModel, db.Model):
     password = db.Column(db.String(255), nullable=False)
     role = db.Column(db.String(255))
     favourite_genre = db.Column(db.ForeignKey(Genre.id))
-
     genre = db.relationship('Genre')
 
 
 class UserSchema(Schema):
     id = fields.Int()
-    username = fields.String()
-    surname = fields.String()
-    email = fields.String()
-    password = fields.String()
-    role = fields.String()
+    username = fields.Str()
+    surname = fields.Str()
+    email = fields.Str()
+    # password = fields.Str()
+    role = fields.Str()
