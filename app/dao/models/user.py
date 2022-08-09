@@ -20,5 +20,5 @@ class UserSchema(Schema):
     username = fields.Str()
     surname = fields.Str()
     email = fields.Str()
-    # password = fields.Str()
+    password = fields.Str()
     role = fields.Str()
