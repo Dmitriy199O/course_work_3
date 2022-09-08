@@ -14,14 +14,13 @@ director_schema = DirectorSchema()
 class DirectorView(Resource):
 
     def get(self):
-        page= request.args.get('page')
+        page = request.args.get('page')
         try:
             all_directors = director_service.get_all()
 
             return directors_schema.dump(all_directors), 200
         except ItemNotFound:
             abort(404)
-
 
 
 @director_ns.route('/<int:did>/')

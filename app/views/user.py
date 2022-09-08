@@ -28,22 +28,22 @@ class UserView(Resource):
             abort(404, 'User not found')
 
 
-@auth_service.auth_required
-def patch(self):
-    try:
-        auth_data = request.headers['Authorization']
-        token = auth_data.split("Bearer ")[-1]
-        email = auth_service.get_email_from_jwt(token)
-        updated_data = user_schema.dump(request.json)
-        user_service.update_user_info(updated_data, email)
-        return "", 200
+    @auth_service.auth_required
+    def patch(self):
+        try:
+            auth_data = request.headers['Authorization']
+            token = auth_data.split("Bearer ")[-1]
+            email = auth_service.get_email_from_jwt(token)
+            updated_data = user_schema.dump(request.json)
+            user_service.update_user_info(updated_data, email)
+            return "", 200
 
-    except MethodNotAllowed:
-        abort(405, "You're not allowed to change the data passed")
-    except UserNotFound:
-        abort(404, 'User not found')
-    except ValidationError:
-        abort(400, 'Wrong fields passed')
+        except MethodNotAllowed:
+            abort(405, "You're not allowed to change the data passed")
+        except UserNotFound:
+            abort(404, 'User not found')
+        except ValidationError:
+            abort(400, 'Wrong fields passed')
 
 
 @user_ns.route('/password/')
@@ -63,8 +63,9 @@ class PasswordView(Resource):
     #         abort(401, 'Incorrect password')
     @auth_service.auth_required
     def put(self):
-
-        email = auth_service.get_email_from_jwt()
+        auth_data = request.headers['Authorization']
+        token = auth_data.split("Bearer ")[-1]
+        email = auth_service.get_email_from_jwt(token)
         user = user_service.get_by_email(email)
 
         old_password = request.json.get('old_password')

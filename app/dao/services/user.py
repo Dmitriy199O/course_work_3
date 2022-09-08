@@ -80,7 +80,7 @@ class UserService(BaseService):
     #     self.dao.update_by_email(data, email)
 
     def update_password(self, email, old_password, new_password):
-        user = self.dao.get_one(email)
+        user = self.get_by_email(email)
         pwd_hash = self.get_hash(old_password)
         if pwd_hash != user.password:
             raise Exception('Invalid password')

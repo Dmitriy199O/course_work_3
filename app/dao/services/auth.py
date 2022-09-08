@@ -65,7 +65,7 @@ class AuthService:
             data = request.headers['Authorization']
             token = data.split('Bearer ')[-1]
             try:
-                jwt.encode(token, current_app.config['JWT_SECRET'], current_app.config['JWT_ALGORITHM'])
+                jwt.decode(token, current_app.config['JWT_SECRET'], current_app.config['JWT_ALGORITHM'])
             except Exception as e:
                 print('JWT encode exception', e)
                 abort(401)

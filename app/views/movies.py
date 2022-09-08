@@ -23,7 +23,7 @@ class MovieView(Resource):
             abort(404)
 
 
-@movies_ns.route('/<int:mid>')
+@movies_ns.route('/<int:mid>/')
 class MovieView(Resource):
 
     def get(self, mid):

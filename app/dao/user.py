@@ -21,9 +21,9 @@ class UserDAO(BaseDAO):
 
         return new_user
 
-    # def update_by_email(self, data: dict, email: str) -> None:
-    #     self.session.query(User).filter(User.email == email).update(data)
-    #     self.session.commit()
+    def update_by_email(self, data: dict, email: str) -> None:
+        self.session.query(User).filter(User.email == email).update(data)
+        self.session.commit()
 
     def update(self, user):
         self.session.add(user)
