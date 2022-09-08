@@ -2,13 +2,12 @@ import base64
 import hashlib
 import hmac
 
+from flask import current_app
 from werkzeug.exceptions import MethodNotAllowed
 
 from app.dao.models.user import User
 from app.dao.services.base import BaseService
-from app.dao.services.exceptions import UserNotFound, WrongPassword
-
-from flask import current_app
+from app.dao.services.exceptions import UserNotFound
 
 
 class UserService(BaseService):
